@@ -1,7 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+
 const connection = require('./models/db');
+const usersRoute = require('./routes/users');
 
 // Connect to MongoDB
 connection();
@@ -9,7 +11,6 @@ connection();
 app.use(express.json());
 
 // Import routes
-const usersRoute = require('./routes/users');
 app.use('/users', usersRoute);
 
 // Start server

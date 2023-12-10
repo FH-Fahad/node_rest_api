@@ -12,11 +12,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Get a specific user
-router.get('/:userId', getUser, (req, res) => {
-    res.json(res.user);
-});
-
 // Create a user
 router.post('/', async (req, res) => {
     const user = new User({
@@ -31,6 +26,11 @@ router.post('/', async (req, res) => {
     } catch (err) {
         res.status(400).json({ message: err });
     }
+});
+
+// Get a specific user
+router.get('/:userId', getUser, (req, res) => {
+    res.json(res.user);
 });
 
 // Update a user
@@ -69,7 +69,7 @@ async function getUser(req, res, next) {
     try {
         user = await User.findById(req.params.userId);
         if (user == null) {
-            return res.status(404).json({ message: 'Cannot find user' });
+            return res.status(404).json({ message: 'User Not Found' });
         }
     }
     catch (err) {
